@@ -1,0 +1,9 @@
+logs/
+plugins/
+config/
+.env
+__pycache__/
+*.pyc
+*.pyo
+.vscode/
+.idea/
