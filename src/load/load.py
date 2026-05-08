@@ -26,6 +26,7 @@ def salva_na_bronze(data):
     print(f"Dados salvos na s3://{BUCKET_NAME}/{file_path}")
 
 
+
 def salva_na_prata(df):
     s3 = boto3.client("s3")
 
@@ -40,4 +41,23 @@ def salva_na_prata(df):
         Key = file_path,
         Body = parquet_data
     )
+
+
+
+def salva_na_ouro(df):
+    s3 = boto3.client("s3")
+
+    date = datetime.now().strftime("%Y-%m-%d")
+
+    file_path = f"ouro/{date}/crypto_aggregated.parquet"
+
+    parquet_data = df.to_parquet(index=False)
+
+    s3.put_object(
+        Bucket = BUCKET_NAME,
+        Key = file_path,
+        Body = parquet_data
+    )
+
+    print(f"Dados salvos na s3://{BUCKET_NAME}/{file_path}")
 

@@ -1,5 +1,4 @@
 import boto3
-import json
 import pandas as pd
 import os
 from io import BytesIO
@@ -16,7 +15,7 @@ def ler_dados_prata():
 
     date = datetime.now().strftime('%Y-%m-%d')
 
-    file_path = f"prata/{date}/crypto.transformed.parquet"
+    file_path = f"prata/{date}/crypto_transformed.parquet"
 
     response = s3.get_object(
         Bucket = BUCKET_NAME,
