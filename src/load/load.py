@@ -26,11 +26,18 @@ def salva_na_bronze(data):
     print(f"Dados salvos na s3://{BUCKET_NAME}/{file_path}")
 
 
+def salva_na_prata(df):
+    s3 = boto3.client("s3")
 
+    date = datetime.now().strftime("%Y-%m-%d")
 
+    file_path = f"prata/{date}/crypto_transformed.parquet"
 
-if __name__ == "__main__":
-    from src.extract.extract import extrair_dados_crypto
+    parquet_data = df.to_parquet(index=False)
 
-    data = extrair_dados_crypto()
-    salva_na_bronze(data, "crypto-pipeline-joao")
+    s3.put_object(
+        Bucket = BUCKET_NAME,
+        Key = file_path,
+        Body = parquet_data
+    )
+
