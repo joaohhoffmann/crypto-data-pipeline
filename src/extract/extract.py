@@ -19,4 +19,7 @@ def extrair_dados_crypto():
 
 
 if __name__ == "__main__":
+    from src.load.load import salva_na_bronze
+    
     data = extrair_dados_crypto()
+    salva_na_bronze(data)   
