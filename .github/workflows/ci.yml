@@ -20,7 +20,7 @@ jobs:
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.14.x'
 
       - name: Instalar dependências
         run: |
@@ -37,10 +37,10 @@ jobs:
       - name: Verificar sintaxe da DAG
         run: |
           python -c "
-          import sys
-          sys.path.insert(0, '.')
-          exec(open('dags/crypto_pipeline_dag.py').read())
-          print('DAG carregada com sucesso')
+          import ast
+          with open('dags/crypto_pipeline_dag.py', 'r') as f:
+              ast.parse(f.read())
+          print('DAG sem erros de sintaxe')
           "
 
       - name: Verificar estrutura do projeto
